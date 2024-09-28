@@ -4,6 +4,8 @@ import HomePage from "../pages/HomePage";
 import PublicPage from "../pages/PublicPage";
 import PrivatePage from "../pages/PrivatePage";
 import LoginPage from "../pages/LoginPage";
+import LoginLayout from "../layout/LoginLayout";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />
+        element: <HomePage />,
       },
       {
         path: "/public",
@@ -20,14 +22,28 @@ const router = createBrowserRouter([
       },
       {
         path: "/private",
-        element: <PrivatePage />,
+        element: (
+          <PrivateRoute>
+            <PrivatePage />
+          </PrivateRoute>
+        ),
       },
+      // {
+      //   path: "/login",
+      //   element: <LoginPage />,
+      // },
+    ],
+  },
+  {
+    path: "/login",
+    element: <LoginLayout />,
+    children: [
       {
         path: "/login",
         element: <LoginPage />,
       },
-    ]
+    ],
   },
 ]);
 
-export default router
+export default router;
